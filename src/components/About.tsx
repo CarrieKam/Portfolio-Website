@@ -31,8 +31,11 @@ const iconMap: Record<AchievementKey, JSX.Element> = {
   "angular": <Code className="text-white w-8 h-8" />,
 };
 
+
+
 const About = () => {
-  const { data, language } = usePortfolio(); 
+  const { data, language,isLoading } = usePortfolio(); 
+  console.log('🎯 consumer data', data, 'loading', isLoading);
 
   // Formatting achievements from raw data
   const achievements = (data.about.achievements || []).map((achievement: any) => ({

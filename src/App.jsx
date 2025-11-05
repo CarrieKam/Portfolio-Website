@@ -47,12 +47,10 @@ const AppContent = () => {
   );
 };
 
-const App = () => {
-  return (
-    <PortfolioProvider>
-      <AppContent />
-    </PortfolioProvider>
-  );
-};
+const App = () => (
+  <PortfolioProvider>
+    <AppContent />  
+  </PortfolioProvider>
+);
 
 export default App;
