@@ -53,7 +53,7 @@ const Profile = () => {
           {/* Buttons for CV download links */}
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
             <a
-              href="https://drive.google.com/file/d/1RZU9vfzh4iSIin2Ndkjy9A3LuMV4dUnO/view?usp=sharing"
+              href={profile.cvLinkEn}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -62,7 +62,7 @@ const Profile = () => {
               </button>
             </a>
             <a
-              href="https://drive.google.com/file/d/1a1rnak8OpWsDsPezYz59D3UmCs0a4RCq/view?usp=sharing"
+              href={profile.cvLinkFr}
               target="_blank"
               rel="noopener noreferrer"
             >

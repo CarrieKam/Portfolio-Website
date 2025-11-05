@@ -69,11 +69,6 @@ function PortfolioProvider({ children }: { children: React.ReactNode }) {
      return () => media.removeEventListener('change', handler);
    }, []);
 
-  if (isLoading) {          // ← this runs on first render
-    console.log('⏳ early return – effect will NOT run');
-    return <p>Loading…</p>;  // ⛔ effect never fires
-  }
-
 const updateContent = (newContent: Partial<PortfolioData>) => {
   setContent(prev => {
       console.log('🛠  updateContent prev', prev, 'new', newContent);
@@ -99,7 +94,6 @@ const value = {
   setTheme,
   updateContent
 };
-console.log('📤 value supplied to context', value);   // ← add
 
   return (
     // Wrap {children} (all child components) inside PortfolioContext.Provider to make value accessible to them

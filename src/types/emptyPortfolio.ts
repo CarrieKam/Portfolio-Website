@@ -1,8 +1,7 @@
-// top of PortfolioContext.tsx
-import type { PortfolioData, LanguageType, ThemeType } from '../types/portfolio';
+import type { PortfolioData } from '../types/portfolio';
 
 export const emptyPortfolioData: PortfolioData = {
-  profile: { name: '', status: '', place: '', program: '', description: '' },
+  profile: { name: '', status: '', place: '', program: '', description: '', cvLinkEn: '', cvLinkFr: '' },
   about:   { achievements: [] },
   work:    { timeline: [] },
   projects:{ project: [] },

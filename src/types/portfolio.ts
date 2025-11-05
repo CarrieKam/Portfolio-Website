@@ -10,6 +10,8 @@ export interface Profile {
   place: string;
   program: string;
   description: string;
+  cvLinkEn: string;
+  cvLinkFr: string;
 }
 
 export interface About {
