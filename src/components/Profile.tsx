@@ -45,7 +45,10 @@ const Profile = () => {
           <h2 className="text-lg md:text-lg lg:text-2xl leading-10">
             {profile.status} {profile.place} {profile.program}
           </h2>
-          <h2 className="text-lg md:text-2xl leading-10">{profile.description}</h2>
+          <h2 className="text-lg md:text-2xl leading-10">{profile.description}<iframe
+            src="https://giphy.com/embed/C5NXCBMq16cdKbm8su"
+            className="giphy-embed inline-block align-baseline w-7 h-7 md:w-9 md:h-9 mx-1"
+          /></h2>
 
           {/* Buttons for CV download links */}
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
