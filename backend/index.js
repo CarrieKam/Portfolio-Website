@@ -20,5 +20,9 @@ app.get('/api/portfolio', async (_req, res) => {
   const doc = await Portfolio.findOne();   // { _id, en, fr }
   res.json(doc ? { en: doc.en, fr: doc.fr } : { en: {}, fr: {} });
 });
+// Simple health endpoint so the service root responds with JSON instead of Express's default "Cannot GET /"
+app.get('/', (_req, res) => {
+  res.json({ status: 'ok', api: '/api/portfolio' });
+});
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`API on :${PORT}`));
