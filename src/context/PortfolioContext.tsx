@@ -41,7 +41,7 @@ function PortfolioProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
       const apiBase = import.meta.env.VITE_API_URL ?? '';
       console.log('🚀 about to fetch from', apiBase || '(no VITE_API_URL; using relative path)');
-      fetch(`${apiBase}/api/portfolio`)
+      fetch(`${apiBase}api/portfolio`)
         .then(r => {
           console.log('➡️ fetch resolved, status:', r.status, 'url:', r.url);
           if (!r.ok) throw new Error(`Bad response: ${r.status}`);
