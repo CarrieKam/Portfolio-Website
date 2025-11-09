@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { emptyPortfolioData } from '../types/emptyPortfolio';   // ① our fallback
-import type { PortfolioData, LanguageType, ThemeType } from '../types/portfolio';
+import type { PortfolioData, LanguageType, ThemeType, Language } from '../types/portfolio';
 
 
 interface PortfolioContextType {
@@ -32,16 +32,19 @@ function PortfolioProvider({ children }: { children: React.ReactNode }) {
   }
   const [language, setLanguage] = useState<LanguageType>('en');
   const [isLoading, setIsLoading] = useState(true);
-  const [content, setContent] = useState<LanguageType | null>(null);
+  // content holds both languages (en/fr) returned from the API
+  const [content, setContent] = useState<Language | null>(null);
   const [theme, setTheme] = useState<ThemeType>(() => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
     useEffect(() => {
-      console.log('🚀 about to fetch from', import.meta.env.VITE_API_URL);
-      fetch(`${import.meta.env.VITE_API_URL}/api/portfolio`)
+      const apiBase = import.meta.env.VITE_API_URL ?? '';
+      console.log('🚀 about to fetch from', apiBase || '(no VITE_API_URL; using relative path)');
+      fetch(`${apiBase}/api/portfolio`)
         .then(r => {
-          console.log('➡️ fetch resolved, status:', r.status); // ← NEW
+          console.log('➡️ fetch resolved, status:', r.status, 'url:', r.url);
+          if (!r.ok) throw new Error(`Bad response: ${r.status}`);
           return r.json();
         })
         .then(blob => {
@@ -50,7 +53,9 @@ function PortfolioProvider({ children }: { children: React.ReactNode }) {
           setIsLoading(false);
         })
         .catch(err => {
-          console.error('❌ fetch failed:', err); // ← NEW
+          console.error('❌ fetch failed:', err);
+          // Provide a safe fallback so the UI doesn't crash when deployed without a backend
+          setContent({ en: emptyPortfolioData, fr: emptyPortfolioData });
           setIsLoading(false);
         });
     }, []);
@@ -86,7 +91,7 @@ const updateContent = (newContent: Partial<PortfolioData>) => {
 
   // Creates the values that PortfolioContext will give to any child components
 const value = {
-  data: content?.[language],
+  data: content?.[language] ?? emptyPortfolioData,
   language,
   theme,
   isLoading,
