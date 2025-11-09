@@ -13,8 +13,16 @@ app.use(cors());// Attach the CORS middleware to every incoming request → add 
 app.use(express.json());// Attach Express’s built-in body-parser. 
 // Whenever the client sends JSON (Content-Type: application/json), parse it into req.body so I can read it inside my route handlers.
 
-await mongoose.connect(process.env.MONGO_URL);
-console.log('Mongo connected');
+try {
+  // Try to connect with a short server selection timeout and force IPv4 (family: 4) to avoid
+  // potential IPv6/DNS/TLS handshake issues on some hosts.
+  await mongoose.connect(process.env.MONGO_URL, { serverSelectionTimeoutMS: 10000, family: 4 });
+  console.log('Mongo connected');
+} catch (err) {
+  console.error('Mongo connection error:', err);
+  // Exit so the platform can restart the process and you can see fresh logs quickly.
+  process.exit(1);
+}
 
 app.get('/api/portfolio', async (_req, res) => {
   const doc = await Portfolio.findOne();   // { _id, en, fr }
