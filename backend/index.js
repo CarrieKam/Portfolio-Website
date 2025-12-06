@@ -24,6 +24,11 @@ try {
   process.exit(1);
 }
 
+
+app.get('/health', (_req, res) => { 
+  res.status(200).send('OK');
+});
+
 app.get('/api/portfolio', async (_req, res) => {
   const doc = await Portfolio.findOne();   // { _id, en, fr }
   res.json(doc ? { en: doc.en, fr: doc.fr } : { en: {}, fr: {} });
@@ -34,3 +39,4 @@ app.get('/', (_req, res) => {
 });
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`API on :${PORT}`));
+
