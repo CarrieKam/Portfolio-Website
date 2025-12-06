@@ -1,8 +1,9 @@
 "use client";
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BackgroundBeamsWithCollision } from './ui/background-beams-with-collision';
 import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 import { usePortfolio } from '../context/PortfolioContext';
+import { Activity } from 'lucide-react';
 
 const Footer = () => {
     const { data, language } = usePortfolio();
@@ -22,10 +23,14 @@ const Footer = () => {
                 Copyright @Carrie Kam
             </div>
             </BackgroundBeamsWithCollision>
-            <TypewriterEffectSmooth 
-            words={[{ text: data.ending.text }]}
-            className="absolute inset-0 z-10 break-words flex items-center justify-center text-2xl" 
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Activity>
+                    <TypewriterEffectSmooth 
+                    words={[{ text: data.ending.text }]}
+                    className="absolute inset-0 z-10 break-words flex items-center justify-center text-2xl" 
+                    />
+                </Activity>
+            </Suspense>    
         </div>
     );
 }

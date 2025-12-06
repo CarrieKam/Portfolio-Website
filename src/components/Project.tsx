@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { FaGithub } from "react-icons/fa";
 import projectIcon from '../assets/logos/project.svg';
 import { BackgroundGradient } from './ui/background-gradient';
+import { Activity } from 'lucide-react';
 
 const WorkTimeline = () => {
   const { data, language } = usePortfolio();
@@ -118,9 +119,13 @@ const WorkTimeline = () => {
 
           {/* Render each project in the category */}
           <div className="flex flex-wrap items-center justify-center p-4 md:mt-4 gap-8">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
-            ))}
+            <Suspense fallback={<div>Loading...</div>}>
+            <Activity>
+                {projects.map((project, index) => (
+                  <ProjectCard key={index} project={project} />
+                ))}
+              </Activity>
+            </Suspense>
           </div>
         </div>
       ))}
