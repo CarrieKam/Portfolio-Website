@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: Portfolio-Website
+    env: static
+    buildCommand: ./build_script.sh
+    staticPublishPath: ./public
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=86400
