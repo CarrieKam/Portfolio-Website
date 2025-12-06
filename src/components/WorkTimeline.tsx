@@ -1,8 +1,6 @@
 import { usePortfolio } from '../context/PortfolioContext';
 import workIcon from '../assets/logos/work.svg';
 import { Timeline } from './ui/timeline';
-import { Suspense } from 'react';
-import { Activity } from 'lucide-react';
 
 const WorkTimeline = () => {
   const { data, language } = usePortfolio();
@@ -21,46 +19,41 @@ const WorkTimeline = () => {
       
       {/* Timeline Section */}
       <div className="w-full">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Activity>
-            <Timeline 
-              // Map over work timeline data to format it for the Timeline component
-              data={data.work.timeline.map(entry => ({
-                // Define the title, including the date and location
-                title: [{ date: entry.date, location: entry.location }],
-                // Content block for each timeline entry
-                content: (
-                  <div className="p-4 bg-gray-100 dark:bg-[#1a2c34] rounded-lg shadow-md border">
-                    {/* Display the company name */}
-                    <p className="text-lg font-medium">{entry.company}</p>
-                    
-                    {/* Description list */}
-                    <ul className="list-disc ml-4 space-y-2">
-                      {entry.description.map((desc, index) => (
-                        // Each description is rendered as a list item
-                        <li key={index} className="dark:text-gray-300 text-[#090B10] text-base">{desc}</li>
-                      ))}
-                    </ul>
+        <Timeline 
+          // Map over work timeline data to format it for the Timeline component
+          data={data.work.timeline.map(entry => ({
+            // Define the title, including the date and location
+            title: [{ date: entry.date, location: entry.location }],
+            // Content block for each timeline entry
+            content: (
+              <div className="p-4 bg-gray-100 dark:bg-[#1a2c34] rounded-lg shadow-md border">
+                {/* Display the company name */}
+                <p className="text-lg font-medium">{entry.company}</p>
+                
+                {/* Description list */}
+                <ul className="list-disc ml-4 space-y-2">
+                  {entry.description.map((desc, index) => (
+                    // Each description is rendered as a list item
+                    <li key={index} className="dark:text-gray-300 text-[#090B10] text-base">{desc}</li>
+                  ))}
+                </ul>
 
-                    {/* Tags Section */}
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {entry.tags.map((tag, index) => (
-                        // Render each tag as a pill-shaped element
-                        <span 
-                          key={index} 
-                          className="px-3 py-1 text-sm bg-[#53CBDD] dark:bg-[#13404F] text-[090B10] dark:text-[#CAEDFA] rounded-full"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )
-              }))} 
-            />
-          </Activity>
-        </Suspense>
-
+                {/* Tags Section */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {entry.tags.map((tag, index) => (
+                    // Render each tag as a pill-shaped element
+                    <span 
+                      key={index} 
+                      className="px-3 py-1 text-sm bg-[#53CBDD] dark:bg-[#13404F] text-[090B10] dark:text-[#CAEDFA] rounded-full"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )
+          }))} 
+        />
       </div>
     </section>
   );

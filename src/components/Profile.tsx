@@ -1,6 +1,6 @@
 import girl from '../assets/images/girl.png'; 
-import { Suspense, useEffect, useState } from 'react'; 
-import { Mail, Github, Linkedin, Activity } from 'lucide-react'; 
+import { useEffect, useState } from 'react'; 
+import { Mail, Github, Linkedin } from 'lucide-react'; 
 import { usePortfolio } from '../context/PortfolioContext'; 
 import { Spotlight } from './ui/Spotlight';
 
@@ -37,45 +37,40 @@ const Profile = () => {
 
       {/* Container for profile content */}
       <div className="flex flex-col md:flex-row items-center justify-between lg:h-screen md:h-full mx-8 mb-20">
-        
         {/* Left side: Text and buttons */}
         <div className="space-y-7 text-center md:text-left ">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Activity>            
-              <h1 className="text-3xl md:text-5xl lg:text-7xl mt-20 font-bold leading-30">
-                {greeting}<br /> {language === 'en' ? "I'm" : "Je suis"} <span className="underline decoration-sky-500 whitespace-nowrap">{profile.name}</span>
-              </h1>
-              <h2 className="text-lg md:text-lg lg:text-2xl leading-10">
-                {profile.status} {profile.place} {profile.program}
-              </h2>
-              <h2 className="text-lg md:text-2xl leading-10">{profile.description}<iframe
-                src="https://giphy.com/embed/C5NXCBMq16cdKbm8su"
-                className="giphy-embed inline-block align-baseline w-7 h-7 md:w-9 md:h-9 mx-1"
-              /></h2>
+          <h1 className="text-3xl md:text-5xl lg:text-7xl mt-20 font-bold leading-30">
+            {greeting}<br /> {language === 'en' ? "I'm" : "Je suis"} <span className="underline decoration-sky-500 whitespace-nowrap">{profile.name}</span>
+          </h1>
+          <h2 className="text-lg md:text-lg lg:text-2xl leading-10">
+            {profile.status} {profile.place} {profile.program}
+          </h2>
+          <h2 className="text-lg md:text-2xl leading-10">{profile.description}<iframe
+            src="https://giphy.com/embed/C5NXCBMq16cdKbm8su"
+            className="giphy-embed inline-block align-baseline w-7 h-7 md:w-9 md:h-9 mx-1"
+          /></h2>
 
-              {/* Buttons for CV download links */}
-              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
-                <a
-                  href={profile.cvLinkEn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button className="px-6 py-3 bg-[#3DB7CA] text-lg md:text-2xl text-white rounded-lg shadow transition-all duration-200 hover:shadow-[inset_0_6px_10px_0_rgba(0,0,0,0.6)]">
-                    CV (en)
-                  </button>
-                </a>
-                <a
-                  href={profile.cvLinkFr}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button className="px-6 py-3 bg-[#3DB7CA] text-lg md:text-2xl text-white rounded-lg shadow transition-all duration-200 hover:shadow-[inset_0_6px_10px_0_rgba(0,0,0,0.6)]">
-                    CV (fr)
-                  </button>
-                </a>
-              </div>
-            </Activity>
-          </Suspense>
+          {/* Buttons for CV download links */}
+          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
+            <a
+              href={profile.cvLinkEn}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-6 py-3 bg-[#3DB7CA] text-lg md:text-2xl text-white rounded-lg shadow transition-all duration-200 hover:shadow-[inset_0_6px_10px_0_rgba(0,0,0,0.6)]">
+                CV (en)
+              </button>
+            </a>
+            <a
+              href={profile.cvLinkFr}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-6 py-3 bg-[#3DB7CA] text-lg md:text-2xl text-white rounded-lg shadow transition-all duration-200 hover:shadow-[inset_0_6px_10px_0_rgba(0,0,0,0.6)]">
+                CV (fr)
+              </button>
+            </a>
+          </div>
         </div>
 
         {/* Right side: Profile image and social links */}
@@ -89,21 +84,17 @@ const Profile = () => {
           </div>
 
           {/* Social media icons */}
-          <Suspense fallback={<div>Loading...</div>}>
-            <Activity>            
-              <div className="flex space-x-6 mt-4 ml-4 justify-center">
-                <a href={social.linkedin} target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="w-6 h-6 md:w-8 md:h-8 text-[#3DB7CA] hover:text-[#A3466A]" />
-                </a>
-                <a href={social.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="w-6 h-6 md:w-8 md:h-8 text-[#3DB7CA] hover:text-[#A3466A]" />
-                </a>
-                <a href={`mailto:${social.email}`}>
-                  <Mail className="w-6 h-6 md:w-8 md:h-8 text-[#3DB7CA] hover:text-[#A3466A]" />
-                </a>
-              </div>
-            </Activity>
-          </Suspense>
+          <div className="flex space-x-6 mt-4 ml-4 justify-center">
+            <a href={social.linkedin} target="_blank" rel="noopener noreferrer">
+              <Linkedin className="w-6 h-6 md:w-8 md:h-8 text-[#3DB7CA] hover:text-[#A3466A]" />
+            </a>
+            <a href={social.github} target="_blank" rel="noopener noreferrer">
+              <Github className="w-6 h-6 md:w-8 md:h-8 text-[#3DB7CA] hover:text-[#A3466A]" />
+            </a>
+            <a href={`mailto:${social.email}`}>
+              <Mail className="w-6 h-6 md:w-8 md:h-8 text-[#3DB7CA] hover:text-[#A3466A]" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

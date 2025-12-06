@@ -1,8 +1,6 @@
 import { usePortfolio } from '../context/PortfolioContext';
 import educationIcon from '../assets/logos/education.svg';
 import { HoverEffect } from './ui/card-hover-effect';
-import { Suspense } from 'react';
-import { Activity } from 'lucide-react';
 
 const Education = () => {
   const { data, language } = usePortfolio();
@@ -15,11 +13,8 @@ const Education = () => {
           {language === 'fr' ? 'Éducation' : 'Education'} 
         </h2>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Activity>
-          <HoverEffect items={data.education.schools} />
-        </Activity>
-      </Suspense>
+
+      <HoverEffect items={data.education.schools} />
     </section>
   );
 }
